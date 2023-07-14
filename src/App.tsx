@@ -23,7 +23,7 @@ const App = () => {
     );
   }, []);
 
-  console.log(dataProvider,"dataProvider");
+  console.log(dataProvider,"dataProviderddddd");
   
 
   if (!dataProvider) {
