@@ -7,24 +7,26 @@ import Screens from "./pages/screens/Screens";
 
 const App = () => {
   const [dataProvider, setDataProvider] = React.useState(null);
+
   React.useEffect(() => {
-    const headers = {
-      apiKey:
-        "KjyfNQ7ZV9CSsd1u84ZdmvLifQATfxBNqXrFdku5E1K4gKSgu8tzG5DlCpjFTHqV",
+    const fetchDataProvider = async () => {
+      try {
+        const graphQlDataProvider = await buildGraphQLProvider({
+          clientOptions: {
+            uri: "https://reacadmin.hottelio.workers.dev/api/client/v2.0/app/dev-graphql-qhavf/graphql",
+          },
+        }).then((graphQlDataProvider) =>
+          setDataProvider(() => graphQlDataProvider)
+        );
+      } catch (error) {
+        console.error("Failed to fetch data provider:", error);
+      }
     };
-  
-    buildGraphQLProvider({
-      clientOptions: {
-        uri: "https://europe-west1.gcp.realm.mongodb.com/api/client/v2.0/app/dev-graphql-qhavf/graphql",
-        headers: headers,
-      },
-    }).then((graphQlDataProvider) =>
-      setDataProvider(() => graphQlDataProvider)
-    );
+
+    fetchDataProvider();
   }, []);
 
-  console.log(dataProvider,"dataProviderddddd");
-  
+  console.log(dataProvider, "dataProviderddddd");
 
   if (!dataProvider) {
     return <div>Loading </div>;

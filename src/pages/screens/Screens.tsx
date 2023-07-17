@@ -43,7 +43,7 @@ const ResourceList = () => {
     <Box sx={{ pl: 4, pr: 3, pt: 7 }}>
       <List title="Our Screens">
         <Datagrid>
-          <TextField label="Screen" source="_id" />
+          <TextField label="Id" source="_id" />
           <EditButton />
         </Datagrid>
       </List>
