@@ -1,50 +1,27 @@
-import React, {
-  FC,
-  useState,
-  useCallback,
-  useEffect,
-  cloneElement,
-  Fragment,
-  ReactElement,
-} from "react";
-import {
-  BooleanField,
-  Datagrid,
-  List,
-  DateField,
-  FunctionField,
-  TextField,
-  EditButton,
-  useListContext,
-  CreateButton,
-  TopToolbar,
-  FilterButton,
-  ExportButton,
-  sanitizeListRestProps,
-  Pagination,
-  TextInput,
-  useGetOne,
-  Button,
-  DateInput,
-  downloadCSV,
-  ReferenceField,
-} from "react-admin";
-import {
-  Typography,
-  Chip,
-  Box,
-  Stack,
-  Divider,
-  ButtonBase,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Datagrid, List, TextField, EditButton } from "react-admin";
+import { Box } from "@mui/material";
+import { gql } from "graphql-tag";
+import { useQuery } from "@apollo/client";
 
 const ResourceList = () => {
+  const GET_SCREENS = gql`
+    query Screens {
+      screen {
+        _id
+      }
+    }
+  `;
+
+  const { data, loading, error } = useQuery(GET_SCREENS);
+
+  console.log(data, "dataaaaa");
+
   return (
     <Box sx={{ pl: 4, pr: 3, pt: 7 }}>
-      <List title="Our Screens">
+      <List title="Screens" >
         <Datagrid>
           <TextField label="Id" source="_id" />
-          <EditButton />
         </Datagrid>
       </List>
     </Box>
